@@ -4,7 +4,15 @@ import { useState, useEffect } from 'react';
 import { NftGallery } from 'react-nft-gallery';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { providers } from 'ethers';
-import { Button, Flex, Heading, Input, Text, VStack } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Input,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
 import debounce from 'lodash.debounce';
 
 const Home: NextPage = () => {
@@ -59,7 +67,7 @@ const Home: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>react-nft-gallery Demo</title>
+        <title>react-nft-gallery</title>
         <meta
           name="description"
           content="Demo application for react-nft-gallery"
@@ -69,7 +77,7 @@ const Home: NextPage = () => {
 
       <main>
         <Heading as="h1" textAlign="center">
-          🖼 react-nft-gallery
+          🖼 ✨ react-nft-gallery
         </Heading>
         {hasWalletAddr && (
           <VStack alignItems="flex-end" p="8">
@@ -94,17 +102,26 @@ const Home: NextPage = () => {
           <NftGallery ownerAddress={walletAddr!} darkMode />
         ) : (
           <VStack
-            maxWidth="33%"
             height="100vh"
             margin="auto"
             justifyContent="center"
             alignItems="center"
             spacing="6"
+            px="6"
           >
-            <Button onClick={connectWallet}>Connect Wallet</Button>
+            <Button onClick={connectWallet}>
+              <Image
+                src="/walletconnect-logo.svg"
+                alt="WalletConnect Logo"
+                height="4"
+                pr="2"
+              />
+              Connect Wallet
+            </Button>
             <span>OR</span>
             <Input
-              placeholder="Enter ETH address (0x...) or ENS domain (vitalik.eth)"
+              maxWidth={{ base: '100%', md: '50%', lg: '33%' }}
+              placeholder="ENS domain (vitalik.eth) or 0x..."
               onChange={debounce(
                 (evt) => setWalletAddr(evt.target.value),
                 1000
